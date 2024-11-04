@@ -1,14 +1,11 @@
 package by.polly.beatyshop.modules.review.service.impl;
 
-import by.polly.beatyshop.modules.review.api.exception.exceptions.EntityNotFoundException;
-import by.polly.beatyshop.modules.review.core.criteria.ReviewCriteriaBuilder;
-import by.polly.beatyshop.modules.review.core.criteria.filter.ReviewFilter;
 import by.polly.beatyshop.modules.review.core.entity.ReviewEntity;
 import by.polly.beatyshop.modules.review.core.repository.ReviewRepository;
 import by.polly.beatyshop.modules.review.service.ReviewService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +15,6 @@ import java.util.List;
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
-    private final MongoTemplate mongoTemplate;
 
     @Override
     public ReviewEntity save(final ReviewEntity review) {
@@ -38,8 +34,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<ReviewEntity> getAllFilteredByProductId(final ReviewFilter reviewFilter) {
-        final var query = ReviewCriteriaBuilder.getQuery(reviewFilter);
-        return mongoTemplate.find(query, ReviewEntity.class);
+    public List<ReviewEntity> getAll() {
+        return reviewRepository.findAll();
     }
 }

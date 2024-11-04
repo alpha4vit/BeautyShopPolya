@@ -7,6 +7,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 
@@ -32,5 +33,15 @@ public class UserServiceImpl implements UserService {
     public UserEntity save(final UserEntity entity) {
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
         return userRepository.save(entity);
+    }
+
+    @Override
+    public UserEntity login(final UserEntity entity) {
+        final var user = userRepository.findByEmail(entity.getEmail());
+        if (passwordEncoder.encode(entity.getPassword()).equals(user.getPassword())){
+            return user;
+        }
+
+        throw new IllegalArgumentException("Forbidden");
     }
 }

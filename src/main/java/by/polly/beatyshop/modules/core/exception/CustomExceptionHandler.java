@@ -1,8 +1,7 @@
-package by.polly.beatyshop.modules.review.api.exception;
+package by.polly.beatyshop.modules.core.exception;
 
-import by.polly.beatyshop.modules.review.api.dto.ExceptionResponse;
-import by.polly.beatyshop.modules.review.api.exception.exceptions.EntityNotFoundException;
-import lombok.extern.slf4j.Slf4j;
+import by.polly.beatyshop.modules.product.api.dto.ExceptionResponse;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -18,7 +17,6 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.toMap;
 
-@Slf4j
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -34,7 +32,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<Object> handle(Exception exception) {
-        log.error(exception.getMessage());
+        logger.error(exception.getMessage());
         return switch (exception) {
             case EntityNotFoundException e -> createResponse(e, HttpStatus.NOT_FOUND, new HashMap<>());
             default -> createResponse(exception, HttpStatus.INTERNAL_SERVER_ERROR, new HashMap<>());

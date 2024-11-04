@@ -1,1 +1,11 @@
-spring.application.name=BeautyShop
+spring:
+  application:
+    name: BeautyShopPolya
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/beauty_polya
+    username: postgres
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: create

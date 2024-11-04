@@ -3,6 +3,7 @@ package by.polly.beatyshop.modules.order.api.controller.impl;
 import by.polly.beatyshop.modules.order.api.controller.OrderController;
 import by.polly.beatyshop.modules.order.api.dto.Order;
 import by.polly.beatyshop.modules.order.api.dto.ProductAddRequest;
+import by.polly.beatyshop.modules.order.core.entity.OrderEntity;
 import by.polly.beatyshop.modules.order.service.OrderService;
 import by.polly.beatyshop.modules.order.service.mapper.OrderMapper;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +34,8 @@ public class OrderControllerImpl implements OrderController {
     }
 
     @Override
-    public ResponseEntity<Order> addProductToOrder(Long orderId, ProductAddRequest productAddRequest){
-        final var res = orderService.addProduct(orderId, productAddRequest);
+    public ResponseEntity<Order> addProductToOrder(Long orderId, ProductAddRequest productAddRequest) {
+        final OrderEntity res = null; //orderService.addProduct(orderId, productAddRequest);
         return ResponseEntity.ok(orderMapper.toDTO(res));
     }
 

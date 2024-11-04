@@ -3,6 +3,8 @@ package by.polly.beatyshop.modules.order.service.mapper;
 
 import by.polly.beatyshop.modules.order.api.dto.Order;
 import by.polly.beatyshop.modules.order.core.entity.OrderEntity;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 
 import java.util.List;
 

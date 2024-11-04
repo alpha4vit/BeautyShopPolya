@@ -1,13 +1,19 @@
 package by.polly.beatyshop.modules.review.core.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@Document("reviews")
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "reviews")
 public class ReviewEntity {
 
     @Id

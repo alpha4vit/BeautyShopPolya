@@ -2,7 +2,6 @@ package by.polly.beatyshop.modules.review.api.controller.impl;
 
 import by.polly.beatyshop.modules.review.api.controller.ReviewController;
 import by.polly.beatyshop.modules.review.api.dto.dto.Review;
-import by.polly.beatyshop.modules.review.core.criteria.filter.ReviewFilter;
 import by.polly.beatyshop.modules.review.service.ReviewService;
 import by.polly.beatyshop.modules.review.service.mapper.ReviewMapper;
 import lombok.AllArgsConstructor;
@@ -20,8 +19,7 @@ public class ReviewControllerImpl implements ReviewController {
 
     @Override
     public List<Review> getAllByProduct(Long productId, Integer stars){
-        final var filter = new ReviewFilter(stars, productId);
-        var reviews = reviewService.getAllFilteredByProductId(filter);
+        var reviews = reviewService.getAll();
         return reviewMapper.toDtos(reviews);
     }
 
