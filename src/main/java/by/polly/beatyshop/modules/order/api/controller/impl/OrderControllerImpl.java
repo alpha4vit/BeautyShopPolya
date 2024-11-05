@@ -35,7 +35,7 @@ public class OrderControllerImpl implements OrderController {
 
     @Override
     public ResponseEntity<Order> addProductToOrder(Long orderId, ProductAddRequest productAddRequest) {
-        final OrderEntity res = null; //orderService.addProduct(orderId, productAddRequest);
+        final OrderEntity res = null;
         return ResponseEntity.ok(orderMapper.toDTO(res));
     }
 

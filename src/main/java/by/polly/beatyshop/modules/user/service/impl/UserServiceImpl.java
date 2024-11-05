@@ -7,7 +7,6 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 
@@ -31,14 +30,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity save(final UserEntity entity) {
+        if (userRepository.findByEmail(entity.getEmail()).isPresent()){
+            throw new IllegalArgumentException("User with this email already exists");
+        }
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
         return userRepository.save(entity);
     }
 
     @Override
-    public UserEntity login(final UserEntity entity) {
-        final var user = userRepository.findByEmail(entity.getEmail());
-        if (passwordEncoder.encode(entity.getPassword()).equals(user.getPassword())){
+    public UserEntity login(final UserEntity request) {
+        final var user = userRepository.findByEmail(request.getEmail()).orElseThrow(
+                () -> new EntityNotFoundException("User with this email not found!")
+        );
+        if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             return user;
         }
 

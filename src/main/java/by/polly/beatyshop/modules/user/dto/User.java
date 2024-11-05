@@ -13,9 +13,11 @@ public record User(
 
         String email,
 
-        @JsonProperty(access = WRITE_ONLY)
         String phoneNumber,
 
+        Integer male,
+
+        @JsonProperty(access = WRITE_ONLY)
         String password
 ) {
 }

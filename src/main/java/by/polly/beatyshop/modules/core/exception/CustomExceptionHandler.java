@@ -32,9 +32,10 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<Object> handle(Exception exception) {
-        logger.error(exception.getMessage());
+        logger.warn(exception.getMessage());
         return switch (exception) {
             case EntityNotFoundException e -> createResponse(e, HttpStatus.NOT_FOUND, new HashMap<>());
+            case IllegalArgumentException e -> createResponse(e, HttpStatus.NOT_FOUND, new HashMap<>());
             default -> createResponse(exception, HttpStatus.INTERNAL_SERVER_ERROR, new HashMap<>());
         };
     }

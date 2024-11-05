@@ -1,4 +1,6 @@
 spring:
+  liquibase:
+    enabled: false
   application:
     name: BeautyShopPolya
   datasource:
@@ -8,4 +10,4 @@ spring:
     password: root
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
