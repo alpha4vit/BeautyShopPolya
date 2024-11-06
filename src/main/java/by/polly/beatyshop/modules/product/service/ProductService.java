@@ -10,9 +10,10 @@ public interface ProductService {
     ProductEntity getById(Long id);
 
     List<ProductEntity> getAll(ProductCategoryFilterDto filter);
+    List<ProductEntity> getAll();
 
     ProductEntity save(ProductEntity product);
 
-    List<ProductEntity> getAllByCategoryId(ProductCategoryFilterDto filter);
+    List<ProductEntity> getAllByCategoryId(Long categoryId);
 
 }

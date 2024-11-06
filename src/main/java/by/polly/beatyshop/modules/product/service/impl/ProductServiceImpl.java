@@ -35,6 +35,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductEntity> getAll() {
+        return productRepository.findAll();
+    }
+
+    @Override
     @Transactional
     public ProductEntity save(ProductEntity product) {
         final var category = productCategoryService.getById(product.getCategory().getId());
@@ -45,8 +50,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductEntity> getAllByCategoryId(final ProductCategoryFilterDto filter) {
-        final var specification = ProductSpecification.getFilterSpecification(filter);
-        return productRepository.findAll(specification);
+    public List<ProductEntity> getAllByCategoryId(final Long categoryId) {
+        return productRepository.findAllByCategoryId(categoryId);
     }
 }
