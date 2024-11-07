@@ -1,7 +1,6 @@
 package by.polly.beatyshop.modules.product.api.controller.impl;
 
 import by.polly.beatyshop.modules.product.api.dto.Product;
-import by.polly.beatyshop.modules.product.api.dto.ProductCategoryFilterDto;
 import by.polly.beatyshop.modules.product.service.ProductService;
 import by.polly.beatyshop.modules.product.service.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;

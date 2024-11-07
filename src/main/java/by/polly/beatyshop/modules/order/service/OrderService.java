@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface OrderService {
 
-    OrderEntity getById(Long id);
+    OrderEntity addToOrder(final Long userId, final ProductAddRequest request);
+
+    OrderEntity getByUserId(Long userId);
 
     List<OrderEntity> getAll();
 

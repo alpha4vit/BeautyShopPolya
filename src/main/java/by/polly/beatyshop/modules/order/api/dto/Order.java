@@ -1,17 +1,19 @@
 package by.polly.beatyshop.modules.order.api.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import by.polly.beatyshop.modules.product.api.dto.Product;
 
-public record Order (
+import java.util.List;
+
+public record Order(
 
         Long id,
 
         Long userId,
 
-        @JsonProperty("order_state")
         String orderState,
 
-        @JsonProperty("sum_price")
-        Double sumPrice
+        Double sumPrice,
+
+        List<Product> products
 ) {
 }

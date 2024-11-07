@@ -1,5 +1,7 @@
 package by.polly.beatyshop.modules.order.core.entity;
 
+import by.polly.beatyshop.modules.product.api.dto.Product;
+import by.polly.beatyshop.modules.product.core.entity.ProductEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,7 +32,11 @@ public class OrderEntity {
     @Column(name = "sum_price")
     private Double sumPrice;
 
-    @OneToMany
-    private List<OrderProductEntity> products;
+    @ManyToMany
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id")
+    )
+    private List<ProductEntity> products;
 
 }
