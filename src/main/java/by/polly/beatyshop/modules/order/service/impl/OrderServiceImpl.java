@@ -43,6 +43,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public OrderEntity removeFromOrder(final Long userId, final Long productId) {
+        var order = orderRepository.findAllByUserIdAndOrderState(userId, OrderState.IN_PROGRESS).getFirst();
+        order.getProducts().removeIf((product) -> product.getId().equals(productId));
+        return orderRepository.save(order);
+    }
+
+    @Override
     public OrderEntity getByUserId(Long userId) {
         var orders =  orderRepository.findAllByUserIdAndOrderState(userId, OrderState.IN_PROGRESS);
         if (orders.isEmpty())

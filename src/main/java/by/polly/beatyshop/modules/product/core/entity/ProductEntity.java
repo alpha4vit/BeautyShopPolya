@@ -39,6 +39,8 @@ public class ProductEntity {
 
     private String units;
 
+    private String image;
+
     @ManyToOne
     @JoinColumn(name = "product_category_id", referencedColumnName = "id")
     private ProductCategoryEntity category;

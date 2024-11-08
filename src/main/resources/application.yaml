@@ -1,6 +1,6 @@
 spring:
   liquibase:
-    enabled: true
+    enabled: false
   application:
     name: BeautyShopPolya
   datasource:
@@ -11,3 +11,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+minio:
+  bucket: images
+  url: http://localhost:9000
+  accessKey: minioadmin
+  secretKey: minioadmin

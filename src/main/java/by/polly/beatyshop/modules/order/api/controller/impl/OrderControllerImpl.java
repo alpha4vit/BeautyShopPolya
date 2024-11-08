@@ -30,4 +30,10 @@ public class OrderControllerImpl {
         var res = orderService.addToOrder(userId, productAddRequest);
         return ResponseEntity.ok(orderMapper.toDTO(res));
     }
+
+    @DeleteMapping(value = "/{userId}/{productId}")
+    public ResponseEntity<Order> removeProductFromOrder(@PathVariable("userId") Long userId, @PathVariable("productId") Long productId) {
+        var res = orderService.removeFromOrder(userId, productId);
+        return ResponseEntity.ok(orderMapper.toDTO(res));
+    }
 }

@@ -27,6 +27,8 @@ public record Product(
 
         String units,
 
+        String image,
+
         @JsonProperty(value = "product_category")
         ProductCategory category,
 

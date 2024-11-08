@@ -2,7 +2,7 @@
 
 --changeset roman_gurinovich:1
 INSERT INTO product_category (id, title) VALUES (0, 'ROOT');
-INSERT INTO product_category (id, title, parent_id) VALUES (3, 'Макияж'), (4, 'Уход');
+INSERT INTO product_category (id, title, parent_id) VALUES (3, 'Макияж', 0), (4, 'Уход', 0);
 
 
 INSERT INTO product (applying, description, name, original_currency, original_price, size, units, product_category_id)
