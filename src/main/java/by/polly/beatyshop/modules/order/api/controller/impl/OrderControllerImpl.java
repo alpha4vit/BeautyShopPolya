@@ -31,6 +31,12 @@ public class OrderControllerImpl {
         return ResponseEntity.ok(orderMapper.toDTO(res));
     }
 
+    @PostMapping(value = "/{userId}/pay", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Order> pay(@PathVariable("userId") Long userId) {
+        var res = orderService.pay(userId);
+        return ResponseEntity.ok(orderMapper.toDTO(res));
+    }
+
     @DeleteMapping(value = "/{userId}/{productId}")
     public ResponseEntity<Order> removeProductFromOrder(@PathVariable("userId") Long userId, @PathVariable("productId") Long productId) {
         var res = orderService.removeFromOrder(userId, productId);

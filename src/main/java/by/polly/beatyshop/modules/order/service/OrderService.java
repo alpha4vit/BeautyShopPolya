@@ -11,6 +11,8 @@ public interface OrderService {
     OrderEntity addToOrder(final Long userId, final ProductAddRequest request);
     OrderEntity removeFromOrder(final Long userId, final Long productId);
 
+    OrderEntity pay(final Long userId);
+
     OrderEntity getByUserId(Long userId);
 
     List<OrderEntity> getAll();

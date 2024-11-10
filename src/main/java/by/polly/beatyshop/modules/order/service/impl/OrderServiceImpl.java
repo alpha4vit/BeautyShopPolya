@@ -50,6 +50,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public OrderEntity pay(final Long userId) {
+        final var order = orderRepository.findAllByUserIdAndOrderState(userId, OrderState.IN_PROGRESS).getFirst();
+        order.setOrderState(OrderState.COMPLETED);
+        return save(order);
+    }
+
+    @Override
     public OrderEntity getByUserId(Long userId) {
         var orders =  orderRepository.findAllByUserIdAndOrderState(userId, OrderState.IN_PROGRESS);
         if (orders.isEmpty())

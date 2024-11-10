@@ -5,7 +5,7 @@ spring:
     name: BeautyShopPolya
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://db:5432/beauty_polya
+    url: jdbc:postgresql://localhost:5432/beauty_polya
     username: postgres
     password: root
   jpa:
@@ -13,6 +13,6 @@ spring:
       ddl-auto: update
 minio:
   bucket: images
-  url: http://minio:9000
+  url: http://localhost:9000
   accessKey: minioadmin
   secretKey: minioadmin
