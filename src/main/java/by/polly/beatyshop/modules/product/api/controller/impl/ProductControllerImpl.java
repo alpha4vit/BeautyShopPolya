@@ -5,8 +5,10 @@ import by.polly.beatyshop.modules.product.service.ProductService;
 import by.polly.beatyshop.modules.product.service.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -25,10 +27,9 @@ public class ProductControllerImpl {
         return ResponseEntity.ok(productMapper.toDTO(product));
     }
 
-    @PostMapping
-    public ResponseEntity<Product> save(Product dto) {
-        log.info(productMapper.toEntity(dto).toString());
-        final var saved = productService.save(productMapper.toEntity(dto));
+    @PostMapping(value = "/create/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Product> save(@PathVariable("userId") Long userId, @RequestBody Product dto) {
+        final var saved = productService.save(userId, productMapper.toEntity(dto));
         return ResponseEntity.ok(productMapper.toDTO(saved));
     }
 
@@ -44,4 +45,10 @@ public class ProductControllerImpl {
         return ResponseEntity.ok(productMapper.toDTOs(products));
     }
 
+    @PostMapping(value = "/create/{product_id}/uploadImage")
+    public List<String> saveImage(
+            @PathVariable("product_id") Long productId,
+            @RequestParam(value = "avatar", name = "avatar") MultipartFile image) {
+        return productService.uploadImages(productId, image);
+    }
 }

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -33,19 +34,18 @@ public class ProductEntity {
 
     private String size;
 
-    @ManyToOne
-    @JoinColumn(name = "measurement_type_id", referencedColumnName = "id")
-    private MeasurementTypeEntity measurementType;
-
     private String units;
 
-    private String image;
+    private Long userId;
+
+    @Column(columnDefinition = "text")
+    private String options;
 
     @ManyToOne
     @JoinColumn(name = "product_category_id", referencedColumnName = "id")
     private ProductCategoryEntity category;
 
-    @OneToMany(mappedBy = "product")
-    private List<ProductImageEntity> images;
+    @Column(columnDefinition = "text")
+    private String images;
 
 }

@@ -29,11 +29,11 @@ public record Product(
 
         String image,
 
+        String options,
+
         @JsonProperty(value = "product_category")
         ProductCategory category,
 
-        List<ImageResponse> images
-
-
+        String images
 ) {
 }

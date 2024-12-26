@@ -1,17 +1,22 @@
 package by.polly.beatyshop.modules.product.service.impl;
 
+import by.polly.beatyshop.modules.core.images.ImageServiceStorage;
+import by.polly.beatyshop.modules.product.api.dto.Image;
 import by.polly.beatyshop.modules.product.api.dto.ProductCategoryFilterDto;
 import by.polly.beatyshop.modules.product.core.entity.ProductEntity;
 import by.polly.beatyshop.modules.product.core.repository.ProductRepository;
 import by.polly.beatyshop.modules.product.core.specification.ProductSpecification;
-import by.polly.beatyshop.modules.product.service.MeasurementTypeService;
 import by.polly.beatyshop.modules.product.service.ProductCategoryService;
 import by.polly.beatyshop.modules.product.service.ProductService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,7 +25,8 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ProductCategoryService productCategoryService;
-    private final MeasurementTypeService measurementTypeService;
+    private final ImageServiceStorage imageServiceStorage;
+    private final ObjectMapper objectMapper;
 
     @Override
     public ProductEntity getById(Long id) {
@@ -41,16 +47,27 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ProductEntity save(ProductEntity product) {
+    public ProductEntity save(Long userId, ProductEntity product) {
         final var category = productCategoryService.getById(product.getCategory().getId());
-        final var measurementType = measurementTypeService.getById(product.getMeasurementType().getId());
         product.setCategory(category);
-        product.setMeasurementType(measurementType);
+        product.setUserId(userId);
+        product.setOptions(product.getOptions());
         return productRepository.save(product);
     }
 
     @Override
     public List<ProductEntity> getAllByCategoryId(final Long categoryId) {
         return productRepository.findAllByCategoryId(categoryId);
+    }
+
+    @Override
+    @SneakyThrows
+    public List<String> uploadImages(final Long productId, final MultipartFile image) {
+        var saved = new ArrayList<String>();
+        String imageName = imageServiceStorage.uploadToStorage(new Image(image));
+        saved.add(imageName);
+        var product = getById(productId);
+        product.setImages(objectMapper.writeValueAsString(saved));
+        return saved;
     }
 }

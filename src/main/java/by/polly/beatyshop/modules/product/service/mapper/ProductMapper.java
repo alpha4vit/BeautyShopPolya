@@ -16,10 +16,8 @@ import java.util.List;
 )
 public interface ProductMapper {
 
-    @Mapping(target = "measurementTypeId", source = "measurementType.id")
     Product toDTO(ProductEntity entity);
 
-    @Mapping(target = "measurementType.id", source = "measurementTypeId")
     ProductEntity toEntity(Product dto);
 
     List<Product> toDTOs(List<ProductEntity> products);
