@@ -1,13 +1,16 @@
 package by.polly.beatyshop.modules.product.core.entity;
 
+import by.polly.beatyshop.modules.favourite.api.dto.Favourite;
+import by.polly.beatyshop.modules.favourite.core.entity.FavouriteEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -25,16 +28,16 @@ public class ProductEntity {
 
     private String description;
 
-    private String applying;
+    private Long roomCount;
 
     private Double originalPrice;
 
     @Column(name = "original_currency")
     private String originalCurrency;
 
-    private String size;
+    private Long square;
 
-    private String units;
+    private Long floor;
 
     private Long userId;
 
@@ -47,5 +50,4 @@ public class ProductEntity {
 
     @Column(columnDefinition = "text")
     private String images;
-
 }

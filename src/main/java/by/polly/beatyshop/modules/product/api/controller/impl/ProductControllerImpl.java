@@ -51,4 +51,15 @@ public class ProductControllerImpl {
             @RequestParam(value = "avatar", name = "avatar") MultipartFile image) {
         return productService.uploadImages(productId, image);
     }
+
+    @GetMapping( "/users/{userId}")
+    public List<Product> getByUserId(@PathVariable("userId") Long userId) {
+        final var products = productService.getAllByUserId(userId);
+        return  productMapper.toDTOs(products);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable("id") Long id) {
+        productService.deleteById(id);
+    }
 }

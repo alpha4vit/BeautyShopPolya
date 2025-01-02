@@ -20,12 +20,13 @@ public record Product(
         @JsonProperty(value = "original_currency")
         String originalCurrency,
 
-        String size,
+        Long square,
 
         @JsonProperty(value = "measurement_type_id")
         Long measurementTypeId,
 
-        String units,
+        @JsonProperty(value = "room_count")
+        Long roomCount,
 
         String image,
 

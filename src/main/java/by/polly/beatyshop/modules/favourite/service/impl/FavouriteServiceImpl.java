@@ -35,6 +35,8 @@ public class FavouriteServiceImpl implements FavouriteService {
         favourite.getProducts().add(product);
         favourite.setSumPrice(favourite.getSumPrice() + product.getOriginalPrice());
 
+        System.out.println(favourite);
+
         return favouriteRepository.save(favourite);
     }
 
@@ -81,4 +83,5 @@ public class FavouriteServiceImpl implements FavouriteService {
     public List<FavouriteEntity> getAllByUserId(Long userId) {
         return favouriteRepository.findAllByUserId(userId);
     }
+
 }

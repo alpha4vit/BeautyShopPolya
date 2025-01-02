@@ -1,6 +1,7 @@
 package by.polly.beatyshop.modules.product.service.impl;
 
 import by.polly.beatyshop.modules.core.images.ImageServiceStorage;
+import by.polly.beatyshop.modules.favourite.service.FavouriteService;
 import by.polly.beatyshop.modules.product.api.dto.Image;
 import by.polly.beatyshop.modules.product.api.dto.ProductCategoryFilterDto;
 import by.polly.beatyshop.modules.product.core.entity.ProductEntity;
@@ -32,6 +33,11 @@ public class ProductServiceImpl implements ProductService {
     public ProductEntity getById(Long id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Product with this id not found!"));
+    }
+
+    @Override
+    public List<ProductEntity> getAllByUserId(Long userId) {
+        return productRepository.findAllByUserId(userId);
     }
 
     @Override
@@ -69,5 +75,11 @@ public class ProductServiceImpl implements ProductService {
         var product = getById(productId);
         product.setImages(objectMapper.writeValueAsString(saved));
         return saved;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        getById(id);
+        productRepository.deleteById(id);
     }
 }

@@ -40,18 +40,18 @@ services:
     networks:
       - app-network
 
-  beauty-shop:
-    build:
-      context: .
-    depends_on:
-      - minio
-      - db
-    container_name: beauty-shop
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/beauty_polya
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=root
-    ports:
-      - "8080:8080"
-    networks:
-      - app-network
+#  beauty-shop:
+#    build:
+#      context: .
+#    depends_on:
+#      - minio
+#      - db
+#    container_name: beauty-shop
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/beauty_polya
+#      - SPRING_DATASOURCE_USERNAME=postgres
+#      - SPRING_DATASOURCE_PASSWORD=root
+#    ports:
+#      - "8080:8080"
+#    networks:
+#      - app-network

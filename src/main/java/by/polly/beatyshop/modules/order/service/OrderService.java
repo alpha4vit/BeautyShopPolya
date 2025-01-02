@@ -9,15 +9,17 @@ import java.util.List;
 public interface OrderService {
 
     OrderEntity addToOrder(final Long userId, final ProductAddRequest request);
-    OrderEntity removeFromOrder(final Long userId, final Long productId);
 
-    OrderEntity pay(final Long userId);
 
-    OrderEntity getByUserId(Long userId);
+    List<OrderEntity> getOrderedByUser(Long userId);
+
+    List<OrderEntity> getByUserId(Long userId);
 
     List<OrderEntity> getAll();
 
     OrderEntity save(OrderEntity order);
+
+    OrderEntity getById(Long id);
 
     void deleteById(Long id);
 

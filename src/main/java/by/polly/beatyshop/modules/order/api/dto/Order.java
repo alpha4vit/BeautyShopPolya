@@ -2,6 +2,7 @@ package by.polly.beatyshop.modules.order.api.dto;
 
 import by.polly.beatyshop.modules.product.api.dto.Product;
 
+import java.time.Instant;
 import java.util.List;
 
 public record Order(
@@ -10,10 +11,12 @@ public record Order(
 
         Long userId,
 
-        String orderState,
-
         Double sumPrice,
 
-        List<Product> products
+        Instant startDate,
+
+        Instant endDate,
+
+        Product product
 ) {
 }

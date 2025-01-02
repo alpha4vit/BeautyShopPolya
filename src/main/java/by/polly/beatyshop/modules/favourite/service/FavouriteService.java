@@ -22,5 +22,4 @@ public interface FavouriteService {
     FavouriteEntity update(Long id, FavouriteEntity favourite);
 
     List<FavouriteEntity> getAllByUserId(Long userId);
-
 }
