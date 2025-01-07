@@ -26,13 +26,13 @@ public class OrderControllerImpl {
     @GetMapping("/{userId}")
     public ResponseEntity<List<Order>> getById(@PathVariable("userId") Long userId) {
         final var product = orderService.getByUserId(userId);
-        return ResponseEntity.ok(orderMapper.toDTOs(product));
+        return ResponseEntity.ok(orderMapper.toDTOs(product).reversed());
     }
 
     @GetMapping("/{userId}/completed")
     public ResponseEntity<List<Order>> getCompleted(@PathVariable("userId") Long userId) {
         final var products = orderService.getOrderedByUser(userId);
-        return ResponseEntity.ok(orderMapper.toDTOs(products));
+        return ResponseEntity.ok(orderMapper.toDTOs(products).reversed());
     }
 
     @PostMapping(value = "/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE)

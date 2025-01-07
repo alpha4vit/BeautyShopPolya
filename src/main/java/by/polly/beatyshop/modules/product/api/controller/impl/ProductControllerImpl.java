@@ -36,13 +36,13 @@ public class ProductControllerImpl {
     @GetMapping
     public ResponseEntity<List<Product>> getAll() {
         final var products = productService.getAll();
-        return ResponseEntity.ok(productMapper.toDTOs(products));
+        return ResponseEntity.ok(productMapper.toDTOs(products).reversed());
     }
 
     @GetMapping("/category/{cat_id}")
     public ResponseEntity<List<Product>> getAllByCategoryIdFiltered(@PathVariable("cat_id") Long categoryId) {
         final var products = productService.getAllByCategoryId(categoryId);
-        return ResponseEntity.ok(productMapper.toDTOs(products));
+        return ResponseEntity.ok(productMapper.toDTOs(products).reversed());
     }
 
     @PostMapping(value = "/create/{product_id}/uploadImage")
@@ -55,7 +55,7 @@ public class ProductControllerImpl {
     @GetMapping( "/users/{userId}")
     public List<Product> getByUserId(@PathVariable("userId") Long userId) {
         final var products = productService.getAllByUserId(userId);
-        return  productMapper.toDTOs(products);
+        return  productMapper.toDTOs(products).reversed();
     }
 
     @DeleteMapping("/{id}")

@@ -53,7 +53,9 @@ public class FavouriteServiceImpl implements FavouriteService {
         if (favourites.isEmpty())
             throw new EntityNotFoundException(String.format("Favourites for user %s not found", userId.toString()));
 
-        return favourites.getFirst();
+        var fav = favourites.getFirst();
+        fav.setProducts(fav.getProducts().reversed());
+        return fav;
     }
 
     @Override
