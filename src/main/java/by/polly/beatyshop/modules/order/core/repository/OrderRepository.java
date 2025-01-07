@@ -1,5 +1,6 @@
 package by.polly.beatyshop.modules.order.core.repository;
 
+import by.polly.beatyshop.modules.order.api.dto.Order;
 import by.polly.beatyshop.modules.order.core.entity.OrderEntity;
 import by.polly.beatyshop.modules.order.core.entity.OrderState;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,4 +11,5 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
     List<OrderEntity> findAllByUserId(Long userId);
+    List<OrderEntity> findAllByProductId(Long productId);
 }

@@ -2,6 +2,8 @@ package by.polly.beatyshop.modules.product.core.entity;
 
 import by.polly.beatyshop.modules.favourite.api.dto.Favourite;
 import by.polly.beatyshop.modules.favourite.core.entity.FavouriteEntity;
+import by.polly.beatyshop.modules.order.api.dto.Order;
+import by.polly.beatyshop.modules.order.core.entity.OrderEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,10 +46,16 @@ public class ProductEntity {
     @Column(columnDefinition = "text")
     private String options;
 
+    @Column(name = "contact_number")
+    private String contactNumber;
+
     @ManyToOne
     @JoinColumn(name = "product_category_id", referencedColumnName = "id")
     private ProductCategoryEntity category;
 
     @Column(columnDefinition = "text")
     private String images;
+
+    @OneToMany
+    private List<OrderEntity> orders;
 }

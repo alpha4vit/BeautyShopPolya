@@ -22,7 +22,6 @@ public class OrderServiceImpl implements OrderService {
     public OrderEntity addToOrder(final Long userId, final ProductAddRequest request) {
         var product = productService.getById(request.productId());
 
-
         var order = OrderEntity.builder()
                 .sumPrice(product.getOriginalPrice())
                 .product(product)
@@ -81,5 +80,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderEntity> getAllByUserId(Long userId) {
         return orderRepository.findAllByUserId(userId);
+    }
+
+    @Override
+    public List<OrderEntity> getAllByProductId(final Long productId) {
+        return orderRepository.findAllByProductId(productId);
     }
 }

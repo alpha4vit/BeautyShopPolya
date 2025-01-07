@@ -27,4 +27,6 @@ public interface OrderService {
 
     List<OrderEntity> getAllByUserId(Long userId);
 
+    List<OrderEntity> getAllByProductId(Long productId);
+
 }

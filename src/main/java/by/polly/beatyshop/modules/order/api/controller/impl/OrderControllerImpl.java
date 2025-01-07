@@ -2,6 +2,7 @@ package by.polly.beatyshop.modules.order.api.controller.impl;
 
 import by.polly.beatyshop.modules.order.api.dto.Order;
 import by.polly.beatyshop.modules.order.api.dto.ProductAddRequest;
+import by.polly.beatyshop.modules.order.core.entity.OrderEntity;
 import by.polly.beatyshop.modules.order.service.OrderService;
 import by.polly.beatyshop.modules.order.service.impl.OrderServiceImpl;
 import by.polly.beatyshop.modules.order.service.mapper.OrderMapper;
@@ -11,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -41,10 +43,15 @@ public class OrderControllerImpl {
         return ResponseEntity.ok(orderMapper.toDTO(res));
     }
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> remove(@PathVariable("id") Long id) {
         orderServiceImpl.deleteById(id);
         return ResponseEntity.ok("Oh nice");
+    }
+
+    @GetMapping("/product/{productId}")
+    public List<Order> getOrderByProduct(@PathVariable("productId") Long productId) {
+        final var orders = orderService.getAllByProductId(productId);
+        return orderMapper.toDTOs(orders);
     }
 }
