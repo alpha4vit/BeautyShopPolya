@@ -58,4 +58,10 @@ public class ProductEntity {
 
     @OneToMany
     private List<OrderEntity> orders;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id", referencedColumnName = "id")
+    private City city;
+
+    private String address;
 }

@@ -1,6 +1,8 @@
 package by.polly.beatyshop.modules.product.api.controller.impl;
 
 import by.polly.beatyshop.modules.product.api.dto.Product;
+import by.polly.beatyshop.modules.product.core.entity.City;
+import by.polly.beatyshop.modules.product.core.repository.CityRepository;
 import by.polly.beatyshop.modules.product.service.ProductService;
 import by.polly.beatyshop.modules.product.service.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ public class ProductControllerImpl {
 
     private final ProductService productService;
     private final ProductMapper productMapper;
+    private final CityRepository cityRepository;
 
     @GetMapping("/{id}")
     public ResponseEntity<Product> getById(@PathVariable("id") Long id) {
@@ -61,5 +64,10 @@ public class ProductControllerImpl {
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable("id") Long id) {
         productService.deleteById(id);
+    }
+
+    @GetMapping("/cities")
+    public List<City> getCities() {
+        return cityRepository.findAll();
     }
 }

@@ -1,5 +1,6 @@
 package by.polly.beatyshop.modules.product.api.dto;
 
+import by.polly.beatyshop.modules.product.core.entity.City;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.core.annotation.Order;
 
@@ -39,6 +40,10 @@ public record Product(
         String images,
 
         @JsonProperty("contact_number")
-        String contactNumber
+        String contactNumber,
+        
+        City city,
+
+        String address
 ) {
 }
